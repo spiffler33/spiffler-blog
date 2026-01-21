@@ -401,36 +401,38 @@ header {
     border-bottom: 1px solid var(--border);
 }
 
-.top-nav {
+.container > header .top-nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
 }
 
-.top-nav .logo {
+.container > header .top-nav .logo {
     font-size: 1.125rem;
     font-weight: 600;
     color: var(--accent-green);
     text-decoration: none;
 }
 
-.top-nav .logo:hover {
+.container > header .top-nav .logo:hover {
     opacity: 0.8;
 }
 
-.nav-links {
+.container > header .nav-links {
     display: flex;
     gap: 24px;
+    margin-left: auto;
 }
 
-.nav-links a {
+.container > header .nav-links a {
     color: var(--text-secondary);
     text-decoration: none;
     font-size: 0.875rem;
     transition: color 150ms;
 }
 
-.nav-links a:hover {
+.container > header .nav-links a:hover {
     color: var(--text-primary);
 }
 
