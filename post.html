@@ -17,6 +17,16 @@
                 <div class="nav-links">
                     <a href="/">blog</a>
                     <a href="/write.html">write</a>
+                    <div class="theme-switcher">
+                        <button class="theme-btn" id="theme-toggle">theme</button>
+                        <div class="theme-menu" id="theme-menu">
+                            <button class="theme-option" data-theme="paper">paper</button>
+                            <button class="theme-option" data-theme="dark">dark</button>
+                            <button class="theme-option" data-theme="matrix">matrix</button>
+                            <button class="theme-option" data-theme="midnight">midnight</button>
+                            <button class="theme-option" data-theme="mono">mono</button>
+                        </div>
+                    </div>
                 </div>
             </nav>
         </header>
@@ -145,6 +155,46 @@
         }
 
         loadPost();
+    </script>
+    <script>
+        // Theme switcher
+        (function() {
+            const toggle = document.getElementById('theme-toggle');
+            const menu = document.getElementById('theme-menu');
+
+            function setTheme(theme) {
+                if (theme === 'paper') {
+                    document.documentElement.removeAttribute('data-theme');
+                } else {
+                    document.documentElement.setAttribute('data-theme', theme);
+                }
+                localStorage.setItem('theme', theme);
+                updateActiveOption(theme);
+            }
+
+            function updateActiveOption(theme) {
+                menu.querySelectorAll('.theme-option').forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.theme === theme);
+                });
+            }
+
+            const saved = localStorage.getItem('theme') || 'paper';
+            setTheme(saved);
+
+            toggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                menu.classList.toggle('open');
+            });
+
+            menu.querySelectorAll('.theme-option').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    setTheme(btn.dataset.theme);
+                    menu.classList.remove('open');
+                });
+            });
+
+            document.addEventListener('click', () => menu.classList.remove('open'));
+        })();
     </script>
 </body>
 </html>
