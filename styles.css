@@ -129,6 +129,20 @@ header {
 .logo {
     font-weight: 500;
     color: var(--accent-green);
+    text-decoration: none;
+}
+
+.logo:hover {
+    opacity: 0.8;
+}
+
+.header-sep {
+    color: var(--text-muted);
+    margin: 0 4px;
+}
+
+.header-current {
+    color: var(--text-secondary);
 }
 
 .header-right {
@@ -311,17 +325,21 @@ header {
 
     #drafts-panel {
         width: 100%;
-        max-height: 30vh;
+        max-height: 25vh;
         border-right: none;
         border-bottom: 1px solid var(--border);
+        order: 1;
     }
 
     #editor-panel {
-        padding: 16px;
+        padding: 12px;
+        order: 2;
+        flex: 1;
     }
 
     #title-input {
-        font-size: 1.25rem;
+        font-size: 1.1rem;
+        margin-bottom: 8px;
     }
 
     #content-input {
@@ -329,11 +347,42 @@ header {
     }
 
     header {
-        padding: 12px;
+        padding: 10px 12px;
     }
 
     .header-right {
         gap: 8px;
+    }
+
+    /* Hide disconnect on mobile - not needed often */
+    .disconnect-btn {
+        display: none;
+    }
+
+    .panel-header {
+        padding: 8px 12px;
+        font-size: 11px;
+    }
+
+    .draft-item {
+        padding: 10px 12px;
+    }
+
+    .draft-title {
+        font-size: 13px;
+    }
+
+    .editor-footer {
+        padding-top: 12px;
+        margin-top: 12px;
+    }
+
+    #word-count {
+        font-size: 11px;
+    }
+
+    .actions .text-btn {
+        font-size: 12px;
     }
 }
 

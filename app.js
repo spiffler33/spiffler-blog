@@ -110,11 +110,15 @@ async function githubAPI(endpoint, options = {}) {
 async function getFileContent(path) {
     try {
         const data = await githubAPI(`/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}`);
+        // Handle base64 with proper UTF-8 decoding
+        const base64 = data.content.replace(/\n/g, '');
+        const content = decodeURIComponent(escape(atob(base64)));
         return {
-            content: atob(data.content),
+            content,
             sha: data.sha
         };
     } catch (err) {
+        console.error('Load error:', err);
         return null;
     }
 }
