@@ -1,17 +1,17 @@
-/* spiffler blog - Terminal Meets Journal */
+/* spiffler blog - Paper Theme */
 
 :root {
-    --bg-primary: #0d1117;
-    --bg-secondary: #161b22;
-    --bg-tertiary: #21262d;
-    --text-primary: #e6edf3;
-    --text-secondary: #8b949e;
-    --text-muted: #6e7681;
-    --accent: #58a6ff;
-    --accent-green: #3fb950;
-    --danger: #f85149;
-    --border: #30363d;
-    --border-hover: #484f58;
+    --bg-primary: #faf8f5;
+    --bg-secondary: #f5f2ed;
+    --bg-tertiary: #ebe7e0;
+    --text-primary: #2c2416;
+    --text-secondary: #5c5347;
+    --text-muted: #8a8279;
+    --accent: #b45309;
+    --accent-green: #92400e;
+    --danger: #b91c1c;
+    --border: #e0dcd4;
+    --border-hover: #c9c4ba;
 }
 
 * {
