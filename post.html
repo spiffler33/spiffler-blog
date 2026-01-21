@@ -10,30 +10,54 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="post-container">
-        <a href="/" class="post-back">← back</a>
-        <article id="post-content">
-            <p class="empty-state">loading...</p>
-        </article>
+    <div class="container">
+        <header>
+            <nav class="top-nav">
+                <a href="https://spiffler.xyz" class="logo">~/spiffler</a>
+                <div class="nav-links">
+                    <a href="/">blog</a>
+                    <a href="/write.html">write</a>
+                </div>
+            </nav>
+        </header>
+
+        <main>
+            <article id="post-content">
+                <p class="empty-state">loading...</p>
+            </article>
+        </main>
+
+        <footer>
+            <span>spiffler.xyz</span>
+        </footer>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
         const REPO_OWNER = 'spiffler33';
         const REPO_NAME = 'spiffler-blog';
+        let currentFilename = null;
+        let currentSha = null;
 
         async function loadPost() {
             const container = document.getElementById('post-content');
             const params = new URLSearchParams(window.location.search);
-            const filename = params.get('p');
+            currentFilename = params.get('p');
 
-            if (!filename) {
+            if (!currentFilename) {
                 container.innerHTML = '<p class="empty-state">post not found</p>';
                 return;
             }
 
             try {
-                const res = await fetch(`https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/main/posts/${filename}`);
+                // Get file with sha for delete
+                const metaRes = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/posts/${currentFilename}`);
+                if (metaRes.ok) {
+                    const meta = await metaRes.json();
+                    currentSha = meta.sha;
+                }
+
+                const res = await fetch(`https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/master/posts/${currentFilename}`);
                 if (!res.ok) throw new Error('Not found');
 
                 const content = await res.text();
@@ -41,14 +65,53 @@
 
                 document.title = `${title} | spiffler`;
 
+                const token = localStorage.getItem('github_token');
+                const deleteBtn = token ? `<button class="delete-post-btn" onclick="deletePost()">delete post</button>` : '';
+
                 container.innerHTML = `
+                    <a href="/" class="back-link">← back</a>
                     <h1 class="post-title">${escapeHtml(title)}</h1>
-                    <div class="post-date">${date}</div>
-                    <div class="post-content">${marked.parse(body)}</div>
+                    <div class="post-meta">
+                        <span class="post-date">${date}</span>
+                        ${deleteBtn}
+                    </div>
+                    <div class="post-body">${marked.parse(body)}</div>
                 `;
 
             } catch (err) {
                 container.innerHTML = '<p class="empty-state">post not found</p>';
+            }
+        }
+
+        async function deletePost() {
+            if (!confirm('Delete this post?')) return;
+
+            const token = localStorage.getItem('github_token');
+            if (!token || !currentSha) {
+                alert('Cannot delete');
+                return;
+            }
+
+            try {
+                const res = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/posts/${currentFilename}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `token ${token}`,
+                        'Accept': 'application/vnd.github.v3+json'
+                    },
+                    body: JSON.stringify({
+                        message: 'Delete post',
+                        sha: currentSha
+                    })
+                });
+
+                if (res.ok) {
+                    window.location.href = '/';
+                } else {
+                    alert('Failed to delete');
+                }
+            } catch (err) {
+                alert('Failed to delete');
             }
         }
 
@@ -57,7 +120,6 @@
             let date = '';
             let body = content;
 
-            // Parse frontmatter
             const match = content.match(/^---\n([\s\S]*?)\n---\n*([\s\S]*)/);
             if (match) {
                 const frontmatter = match[1];

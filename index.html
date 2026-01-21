@@ -11,18 +11,27 @@
 </head>
 <body>
     <div class="container">
-        <header class="blog-header">
-            <h1>~/blog</h1>
-            <p>thoughts from the cave</p>
-            <nav class="blog-nav">
-                <a href="https://spiffler.xyz">home</a>
-                <a href="/write.html">write</a>
+        <header>
+            <nav class="top-nav">
+                <a href="https://spiffler.xyz" class="logo">~/spiffler</a>
+                <div class="nav-links">
+                    <a href="/">blog</a>
+                    <a href="/write.html">write</a>
+                </div>
             </nav>
         </header>
 
-        <main class="posts-list" id="posts-list">
-            <p class="empty-state">loading...</p>
+        <main>
+            <section class="posts-section">
+                <div id="posts-list">
+                    <p class="empty-state">loading...</p>
+                </div>
+            </section>
         </main>
+
+        <footer>
+            <span>spiffler.xyz</span>
+        </footer>
     </div>
 
     <script>
@@ -46,7 +55,6 @@
                     return;
                 }
 
-                // Load each post's frontmatter
                 const postData = await Promise.all(posts.map(async (p) => {
                     const contentRes = await fetch(p.download_url);
                     const content = await contentRes.text();
@@ -60,8 +68,8 @@
 
                 container.innerHTML = postData.map(p => `
                     <a href="/post.html?p=${encodeURIComponent(p.filename)}" class="post-link">
-                        <div class="post-link-title">${escapeHtml(p.title)}</div>
-                        <div class="post-link-date">${p.date}</div>
+                        <span class="post-link-date">${p.date}</span>
+                        <span class="post-link-title">${escapeHtml(p.title)}</span>
                     </a>
                 `).join('');
 
