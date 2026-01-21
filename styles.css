@@ -470,7 +470,7 @@ header {
 }
 
 .container > header .top-nav .logo {
-    font-size: 1.125rem;
+    font-size: 18px;
     font-weight: 600;
     color: var(--accent-green);
     text-decoration: none;
