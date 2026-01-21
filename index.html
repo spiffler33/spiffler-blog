@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>blog | spiffler</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="blog-header">
+            <h1>~/blog</h1>
+            <p>thoughts from the cave</p>
+            <nav class="blog-nav">
+                <a href="https://spiffler.xyz">home</a>
+                <a href="/write.html">write</a>
+            </nav>
+        </header>
+
+        <main class="posts-list" id="posts-list">
+            <p class="empty-state">loading...</p>
+        </main>
+    </div>
+
+    <script>
+        const REPO_OWNER = 'spiffler33';
+        const REPO_NAME = 'spiffler-blog';
+
+        async function loadPosts() {
+            const container = document.getElementById('posts-list');
+
+            try {
+                const res = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/posts`);
+                if (!res.ok) throw new Error('No posts');
+
+                const files = await res.json();
+                const posts = files
+                    .filter(f => f.name.endsWith('.md'))
+                    .sort((a, b) => b.name.localeCompare(a.name));
+
+                if (posts.length === 0) {
+                    container.innerHTML = '<p class="empty-state">no posts yet</p>';
+                    return;
+                }
+
+                // Load each post's frontmatter
+                const postData = await Promise.all(posts.map(async (p) => {
+                    const contentRes = await fetch(p.download_url);
+                    const content = await contentRes.text();
+                    const { title, date } = parseFrontmatter(content);
+                    return {
+                        filename: p.name,
+                        title: title || p.name.replace('.md', ''),
+                        date: date || p.name.substring(0, 10)
+                    };
+                }));
+
+                container.innerHTML = postData.map(p => `
+                    <a href="/post.html?p=${encodeURIComponent(p.filename)}" class="post-link">
+                        <div class="post-link-title">${escapeHtml(p.title)}</div>
+                        <div class="post-link-date">${p.date}</div>
+                    </a>
+                `).join('');
+
+            } catch (err) {
+                container.innerHTML = '<p class="empty-state">no posts yet</p>';
+            }
+        }
+
+        function parseFrontmatter(content) {
+            const match = content.match(/^---\n([\s\S]*?)\n---/);
+            if (!match) return {};
+
+            const frontmatter = {};
+            match[1].split('\n').forEach(line => {
+                const [key, ...rest] = line.split(':');
+                if (key && rest.length) {
+                    frontmatter[key.trim()] = rest.join(':').trim();
+                }
+            });
+            return frontmatter;
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        loadPosts();
+    </script>
+</body>
+</html>

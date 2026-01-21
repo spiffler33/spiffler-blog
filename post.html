@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>post | spiffler</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="post-container">
+        <a href="/" class="post-back">← back</a>
+        <article id="post-content">
+            <p class="empty-state">loading...</p>
+        </article>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        const REPO_OWNER = 'spiffler33';
+        const REPO_NAME = 'spiffler-blog';
+
+        async function loadPost() {
+            const container = document.getElementById('post-content');
+            const params = new URLSearchParams(window.location.search);
+            const filename = params.get('p');
+
+            if (!filename) {
+                container.innerHTML = '<p class="empty-state">post not found</p>';
+                return;
+            }
+
+            try {
+                const res = await fetch(`https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/main/posts/${filename}`);
+                if (!res.ok) throw new Error('Not found');
+
+                const content = await res.text();
+                const { title, date, body } = parsePost(content);
+
+                document.title = `${title} | spiffler`;
+
+                container.innerHTML = `
+                    <h1 class="post-title">${escapeHtml(title)}</h1>
+                    <div class="post-date">${date}</div>
+                    <div class="post-content">${marked.parse(body)}</div>
+                `;
+
+            } catch (err) {
+                container.innerHTML = '<p class="empty-state">post not found</p>';
+            }
+        }
+
+        function parsePost(content) {
+            let title = 'untitled';
+            let date = '';
+            let body = content;
+
+            // Parse frontmatter
+            const match = content.match(/^---\n([\s\S]*?)\n---\n*([\s\S]*)/);
+            if (match) {
+                const frontmatter = match[1];
+                body = match[2];
+
+                frontmatter.split('\n').forEach(line => {
+                    const [key, ...rest] = line.split(':');
+                    if (key && rest.length) {
+                        const value = rest.join(':').trim();
+                        if (key.trim() === 'title') title = value;
+                        if (key.trim() === 'date') date = value;
+                    }
+                });
+            }
+
+            return { title, date, body };
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        loadPost();
+    </script>
+</body>
+</html>

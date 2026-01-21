@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>write | spiffler</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Auth screen -->
+        <div id="auth-screen" class="screen">
+            <div class="auth-container">
+                <h1>~/write</h1>
+                <p>paste your github token to start writing</p>
+                <input type="password" id="token-input" placeholder="ghp_xxxxxxxxxxxx" autocomplete="off">
+                <button id="save-token">connect</button>
+                <p class="hint">
+                    create one at github.com/settings/tokens<br>
+                    needs "repo" scope
+                </p>
+            </div>
+        </div>
+
+        <!-- Main editor screen -->
+        <div id="editor-screen" class="screen hidden">
+            <header>
+                <div class="header-left">
+                    <span class="logo">~/write</span>
+                </div>
+                <div class="header-right">
+                    <span id="save-status"></span>
+                    <button id="disconnect" class="text-btn">disconnect</button>
+                </div>
+            </header>
+
+            <div class="main-container">
+                <!-- Drafts sidebar -->
+                <aside id="drafts-panel">
+                    <div class="panel-header">
+                        <span>drafts</span>
+                        <button id="new-draft" class="text-btn">+ new</button>
+                    </div>
+                    <div id="drafts-list"></div>
+                </aside>
+
+                <!-- Editor -->
+                <main id="editor-panel">
+                    <input type="text" id="title-input" placeholder="untitled" autocomplete="off">
+                    <textarea id="content-input" placeholder="start writing..."></textarea>
+                    <div class="editor-footer">
+                        <span id="word-count">0 words</span>
+                        <div class="actions">
+                            <button id="delete-btn" class="text-btn danger hidden">delete</button>
+                            <button id="publish-btn" class="text-btn muted">publish</button>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
