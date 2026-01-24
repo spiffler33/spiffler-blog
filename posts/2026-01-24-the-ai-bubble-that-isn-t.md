@@ -30,7 +30,7 @@ We've seen this movie before.
 
 **Skype → Zoom → Teams.** Microsoft "lost" video calling to Zoom during the pandemic. Then won it back through bundling, persistence, and iteration. The patience of incumbents is systematically underestimated.
 
-**Google Search → ChatGPT → Gemini.** ChatGPT looked like an existential threat to Google's core business. Eighteen months later? Google's still processing 8.5 billion searches daily, AI Overviews are rolling out, and Gemini is integrated across the product suite. The default survived.
+**Google Search → ChatGPT / Perplexity → Gemini.** ChatGPT looked like an existential threat to Google's core business. Eighteen months later? Google's still processing 8.5 billion searches daily, AI Overviews are rolling out, and Gemini is integrated across the product suite. The default survived.
 
 This is the pattern. Incumbents can afford to be wrong for years because their fallback product isn't going anywhere.
 
