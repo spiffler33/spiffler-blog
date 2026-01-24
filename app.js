@@ -256,12 +256,17 @@ function renderDraftsList() {
 }
 
 async function selectDraft(draft) {
-    // Save current draft first
-    if (currentDraft && hasChanges()) {
+    // Don't switch away from a published post being edited
+    if (currentDraft && currentDraft.isPublished) {
+        if (!confirm('Discard changes to this post?')) return;
+    }
+    // Save current draft first (only for drafts, not published posts)
+    else if (currentDraft && hasChanges()) {
         await saveDraft();
     }
 
     currentDraft = draft;
+    publishBtn.textContent = 'publish'; // Reset button text
 
     // Load content
     const file = await getFileContent(draft.path);
@@ -352,6 +357,8 @@ function scheduleSave() {
 
 async function saveDraft() {
     if (!currentDraft) return;
+    // NEVER auto-save published posts - they use the update flow instead
+    if (currentDraft.isPublished) return;
     if (!hasChanges() && !currentDraft.isNew) return;
 
     const content = composeDraft();
