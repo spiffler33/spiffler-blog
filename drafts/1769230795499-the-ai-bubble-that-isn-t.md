@@ -1,4 +1,7 @@
-# The AI Bubble That Isn't
+---
+title: The AI Bubble That Isn't
+date: 2026-01-24
+---
 
 WHY MSFT, GOOG, AND AMZN ARE BETTER POSITIONED THAN THE NARRATIVE SUGGESTS
 
