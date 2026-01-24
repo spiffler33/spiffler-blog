@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nAdd share and edit buttons to posts\n\n- Share button copies post URL to clipboard \\(visible to all\\)\n- Edit button opens post in editor for updates \\(auth only\\)\n- Update flow preserves original post date\n- Delete button renamed for consistency\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git push:*)",
+      "Bash(git pull:*)",
+      "Bash(git commit:*)"
+    ]
+  }
+}
