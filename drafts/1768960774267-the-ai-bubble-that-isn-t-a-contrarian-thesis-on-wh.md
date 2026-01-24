@@ -1,6 +1,6 @@
 # The AI Bubble That Isn't: A Contrarian Thesis on Why the Incumbents Win
 
-Why MSFT, GOOG, and AMZN are better positioned than the narrative suggests
+WHY MSFT, GOOG, AND AMZN ARE BETTER POSITIONED THAN THE NARRATIVE SUGGESTS
 
 The AI bubble discourse has reached fever pitch. Capacity built but unused. Copilot adoption underwhelming. Billions spent with unclear returns. The skeptics have a point — on the surface.
 
