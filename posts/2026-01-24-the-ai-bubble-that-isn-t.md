@@ -42,7 +42,8 @@ Apple demonstrated this perfectly: they moved from ChatGPT to Gemini without fri
 
 Anthropic is even more exposed — primarily API and enterprise, no meaningful consumer lock-in. If Claude isn't the best model for a use case, why would an enterprise stay?
 
-The frontier gap between leading models has compressed to 3-5 months. That's not enough time to build a durable moat. Distribution wins. And MSFT, GOOG, and AMZN have distribution that took decades to build. The financials make this stark. OpenAI generated $4.3 billion in revenue in the first half of 2025 but posted a $13.5 billion net loss. Microsoft's Q1 fiscal 2026 filing revealed OpenAI lost approximately $11.5 billion in a single quarter. Deutsche Bank estimates OpenAI will accumulate $143 billion in negative cash flow through 2029 — "no startup in history has operated with losses on anything approaching this scale." Microsoft, holding a 27% stake, absorbed a $3.1 billion hit to net income from OpenAI's losses last quarter. But here's the difference: Microsoft still posted $27.7 billion in net income. They can absorb this. OpenAI, without a fallback revenue stream, cannot afford a stumble. The dependency also cuts both ways — OpenAI has now committed to purchasing $250 billion in Azure services. Microsoft's downside is capped; their upside is a locked-in hyperscale customer regardless of who wins the model race.
+The frontier gap between leading models has compressed to 3-5 months. That's not enough time to build a durable moat. Distribution wins. And MSFT, GOOG, and AMZN have distribution that took decades to build.
+
 ---
 
 ## A→B Works. A→C Doesn't (Yet). And That's Fine.
