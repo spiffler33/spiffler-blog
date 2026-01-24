@@ -31,7 +31,6 @@ function init() {
     token = localStorage.getItem('github_token');
     const params = new URLSearchParams(window.location.search);
     const editFile = params.get('edit');
-    console.log('Init - edit param:', editFile);
 
     if (token) {
         showEditor();
@@ -154,12 +153,10 @@ async function deleteFile(path, sha, message = 'Delete') {
 
 // Edit published post
 async function loadPostForEdit(filename) {
-    console.log('Loading post for edit:', filename);
     try {
         const file = await getFileContent(`${POSTS_PATH}/${filename}`);
-        console.log('Got file:', file);
         if (!file) {
-            alert('Could not load post: ' + filename);
+            alert('Could not load post');
             loadDrafts();
             return;
         }
@@ -344,6 +341,11 @@ function hasChanges() {
 
 function scheduleSave() {
     if (saveTimeout) clearTimeout(saveTimeout);
+    // Don't auto-save published posts - only save on "update" click
+    if (currentDraft && currentDraft.isPublished) {
+        saveStatus.textContent = 'editing...';
+        return;
+    }
     saveStatus.textContent = 'editing...';
     saveTimeout = setTimeout(saveDraft, 1500);
 }
