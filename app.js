@@ -29,11 +29,13 @@ const deleteBtn = document.getElementById('delete-btn');
 // Initialize
 function init() {
     token = localStorage.getItem('github_token');
+    const params = new URLSearchParams(window.location.search);
+    const editFile = params.get('edit');
+    console.log('Init - edit param:', editFile);
+
     if (token) {
         showEditor();
         // Check if editing a published post
-        const params = new URLSearchParams(window.location.search);
-        const editFile = params.get('edit');
         if (editFile) {
             loadPostForEdit(editFile);
         } else {
@@ -152,10 +154,12 @@ async function deleteFile(path, sha, message = 'Delete') {
 
 // Edit published post
 async function loadPostForEdit(filename) {
+    console.log('Loading post for edit:', filename);
     try {
         const file = await getFileContent(`${POSTS_PATH}/${filename}`);
+        console.log('Got file:', file);
         if (!file) {
-            alert('Could not load post');
+            alert('Could not load post: ' + filename);
             loadDrafts();
             return;
         }
