@@ -625,33 +625,33 @@ header {
     color: var(--text-primary);
 }
 
-.post-content {
+.post-body {
     color: var(--text-secondary);
     line-height: 1.9;
 }
 
-.post-content p {
+.post-body p {
     margin-bottom: 20px;
 }
 
-.post-content h2 {
+.post-body h2 {
     color: var(--text-primary);
     font-size: 1.25rem;
     margin: 40px 0 16px;
 }
 
-.post-content a {
+.post-body a {
     color: var(--accent);
 }
 
-.post-content code {
+.post-body code {
     background: var(--bg-tertiary);
     padding: 2px 6px;
     border-radius: 4px;
     font-size: 0.9em;
 }
 
-.post-content pre {
+.post-body pre {
     background: var(--bg-secondary);
     border: 1px solid var(--border);
     border-radius: 6px;
@@ -660,7 +660,7 @@ header {
     margin: 20px 0;
 }
 
-.post-content blockquote {
+.post-body blockquote {
     border-left: 2px solid var(--accent);
     padding-left: 16px;
     color: var(--text-muted);
