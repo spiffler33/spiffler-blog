@@ -586,7 +586,12 @@ header {
     font-size: 14px;
 }
 
-.delete-post-btn {
+.post-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.post-action-btn {
     background: none;
     border: 1px solid var(--border);
     color: var(--text-muted);
@@ -598,7 +603,12 @@ header {
     transition: color 150ms, border-color 150ms;
 }
 
-.delete-post-btn:hover {
+.post-action-btn:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+.post-action-btn.danger:hover {
     color: var(--danger);
     border-color: var(--danger);
 }

@@ -76,14 +76,20 @@
                 document.title = `${title} | spiffler`;
 
                 const token = localStorage.getItem('github_token');
-                const deleteBtn = token ? `<button class="delete-post-btn" onclick="deletePost()">delete post</button>` : '';
+                const editBtn = token ? `<button class="post-action-btn" onclick="editPost()">edit</button>` : '';
+                const deleteBtn = token ? `<button class="post-action-btn danger" onclick="deletePost()">delete</button>` : '';
+                const shareBtn = `<button class="post-action-btn" onclick="sharePost()">share</button>`;
 
                 container.innerHTML = `
                     <a href="/" class="back-link">← back</a>
                     <h1 class="post-title">${escapeHtml(title)}</h1>
                     <div class="post-meta">
                         <span class="post-date">${date}</span>
-                        ${deleteBtn}
+                        <div class="post-actions">
+                            ${shareBtn}
+                            ${editBtn}
+                            ${deleteBtn}
+                        </div>
                     </div>
                     <div class="post-body">${marked.parse(body)}</div>
                 `;
@@ -91,6 +97,22 @@
             } catch (err) {
                 container.innerHTML = '<p class="empty-state">post not found</p>';
             }
+        }
+
+        function sharePost() {
+            const url = window.location.href;
+            navigator.clipboard.writeText(url).then(() => {
+                const btn = document.querySelector('.post-action-btn');
+                const original = btn.textContent;
+                btn.textContent = 'copied!';
+                setTimeout(() => btn.textContent = original, 2000);
+            }).catch(() => {
+                prompt('Copy this link:', url);
+            });
+        }
+
+        function editPost() {
+            window.location.href = `/write.html?edit=${encodeURIComponent(currentFilename)}`;
         }
 
         async function deletePost() {

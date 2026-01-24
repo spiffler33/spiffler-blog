@@ -31,7 +31,14 @@ function init() {
     token = localStorage.getItem('github_token');
     if (token) {
         showEditor();
-        loadDrafts();
+        // Check if editing a published post
+        const params = new URLSearchParams(window.location.search);
+        const editFile = params.get('edit');
+        if (editFile) {
+            loadPostForEdit(editFile);
+        } else {
+            loadDrafts();
+        }
     } else {
         showAuth();
     }
@@ -141,6 +148,59 @@ async function deleteFile(path, sha, message = 'Delete') {
         method: 'DELETE',
         body: JSON.stringify({ message, sha })
     });
+}
+
+// Edit published post
+async function loadPostForEdit(filename) {
+    try {
+        const file = await getFileContent(`${POSTS_PATH}/${filename}`);
+        if (!file) {
+            alert('Could not load post');
+            loadDrafts();
+            return;
+        }
+
+        // Parse frontmatter
+        const match = file.content.match(/^---\n([\s\S]*?)\n---\n*([\s\S]*)/);
+        let title = 'untitled';
+        let content = file.content;
+
+        if (match) {
+            const frontmatter = match[1];
+            content = match[2];
+            frontmatter.split('\n').forEach(line => {
+                const [key, ...rest] = line.split(':');
+                if (key && rest.length && key.trim() === 'title') {
+                    title = rest.join(':').trim();
+                }
+            });
+        }
+
+        // Set up as editing a published post
+        currentDraft = {
+            name: filename,
+            path: `${POSTS_PATH}/${filename}`,
+            sha: file.sha,
+            isPublished: true
+        };
+
+        titleInput.value = title;
+        contentInput.value = content.trim();
+        lastSavedContent = file.content;
+
+        deleteBtn.classList.remove('hidden');
+        publishBtn.textContent = 'update';
+        updateWordCount();
+        renderDraftsList();
+
+        // Clear the URL parameter
+        window.history.replaceState({}, '', '/write.html');
+
+    } catch (err) {
+        console.error('Load post error:', err);
+        alert('Could not load post');
+        loadDrafts();
+    }
 }
 
 // Drafts management
@@ -344,59 +404,85 @@ async function publishDraft() {
         return;
     }
 
-    if (!confirm('Publish this post?')) return;
+    const isUpdate = currentDraft.isPublished;
+    if (!confirm(isUpdate ? 'Update this post?' : 'Publish this post?')) return;
 
-    saveStatus.textContent = 'publishing...';
+    saveStatus.textContent = isUpdate ? 'updating...' : 'publishing...';
 
     try {
-        // Get current content
-        const content = composeDraft();
         const title = titleInput.value.trim() || 'untitled';
         const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').substring(0, 50);
-        const date = new Date().toISOString().split('T')[0];
-        const postFilename = `${date}-${slug}.md`;
-        const postPath = `${POSTS_PATH}/${postFilename}`;
 
-        // Add date to frontmatter
-        const postContent = `---\ntitle: ${title}\ndate: ${date}\n---\n\n${contentInput.value.trim()}`;
+        if (isUpdate) {
+            // Update existing published post
+            // Extract date from existing filename
+            const dateMatch = currentDraft.name.match(/^(\d{4}-\d{2}-\d{2})-/);
+            const date = dateMatch ? dateMatch[1] : new Date().toISOString().split('T')[0];
+            const postContent = `---\ntitle: ${title}\ndate: ${date}\n---\n\n${contentInput.value.trim()}`;
 
-        // Create post
-        await saveFile(postPath, postContent, null, `Publish: ${title}`);
+            // Update the post in place
+            await saveFile(currentDraft.path, postContent, currentDraft.sha, `Update: ${title}`);
 
-        // Delete draft
-        await deleteFile(currentDraft.path, currentDraft.sha, 'Published');
+            saveStatus.textContent = 'updated';
 
-        // Remove from drafts list
-        drafts = drafts.filter(d => d.path !== currentDraft.path);
+            // Redirect to the updated post
+            setTimeout(() => {
+                window.location.href = `/post.html?p=${encodeURIComponent(currentDraft.name)}`;
+            }, 500);
 
-        saveStatus.textContent = 'published';
-
-        // Load next draft or create new
-        if (drafts.length > 0) {
-            selectDraft(drafts[0]);
         } else {
-            createNewDraft();
-        }
+            // Publish new post from draft
+            const date = new Date().toISOString().split('T')[0];
+            const postFilename = `${date}-${slug}.md`;
+            const postPath = `${POSTS_PATH}/${postFilename}`;
+            const postContent = `---\ntitle: ${title}\ndate: ${date}\n---\n\n${contentInput.value.trim()}`;
 
-        renderDraftsList();
+            // Create post
+            await saveFile(postPath, postContent, null, `Publish: ${title}`);
+
+            // Delete draft
+            await deleteFile(currentDraft.path, currentDraft.sha, 'Published');
+
+            // Remove from drafts list
+            drafts = drafts.filter(d => d.path !== currentDraft.path);
+
+            saveStatus.textContent = 'published';
+
+            // Load next draft or create new
+            if (drafts.length > 0) {
+                selectDraft(drafts[0]);
+            } else {
+                createNewDraft();
+            }
+
+            renderDraftsList();
+        }
 
     } catch (err) {
         console.error('Publish error:', err);
-        saveStatus.textContent = 'error publishing';
+        saveStatus.textContent = isUpdate ? 'error updating' : 'error publishing';
     }
 }
 
 async function deleteDraft() {
     if (!currentDraft) return;
 
-    if (!confirm('Delete this draft?')) return;
+    const isPublished = currentDraft.isPublished;
+    if (!confirm(isPublished ? 'Delete this post?' : 'Delete this draft?')) return;
 
     if (currentDraft.sha) {
         try {
-            await deleteFile(currentDraft.path, currentDraft.sha, 'Delete draft');
+            await deleteFile(currentDraft.path, currentDraft.sha, isPublished ? 'Delete post' : 'Delete draft');
         } catch (err) {
             console.error('Delete error:', err);
+            return;
         }
+    }
+
+    if (isPublished) {
+        // Redirect to home after deleting a published post
+        window.location.href = '/';
+        return;
     }
 
     drafts = drafts.filter(d => d.path !== currentDraft.path);
