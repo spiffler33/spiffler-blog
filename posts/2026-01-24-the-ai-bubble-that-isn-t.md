@@ -120,7 +120,7 @@ They don't need to borrow to fund this. But it's getting close.
 
 More importantly: **what's the alternative?**
 
-Amazon's CFO put it directly: "We'll continue to make significant investments, especially in AI... We believe it to be a massive opportunity with the potential for strong returns on invested capital over the long term."
+Amazon's CFO put it directly: "We'll continue to make significant investments, especially in AI... We believe it to be a massive opportunity with the potential for strong returns on invested capital over the long term." And notably, Amazon is doing this while simultaneously laying off 14,000-30,000 corporate employees — primarily in HR, middle management, and analytics. This isn't contradiction; it's confirmation. Jassy has been explicit: "We will need fewer people doing some of the jobs that are being done today." The efficiency gains from AI adoption are showing up as reduced headcount. The capex funds the infrastructure; the layoffs capture the value. That's not a bubble — that's ROI materialising.
 
 The alternative to spending $125 billion on AI infrastructure is ceding the cloud and enterprise market to competitors. That's existential.
 
