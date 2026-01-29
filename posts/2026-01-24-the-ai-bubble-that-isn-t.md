@@ -3,8 +3,7 @@ title: The AI Bubble That Isn't..
 date: 2026-01-24
 ---
 
-WHY MSFT, GOOG, AND AMZN ARE BETTER POSITIONED THAN THE NARRATIVE SUGGESTS
-
+## WHY MSFT, GOOG, AND AMZN ARE BETTER POSITIONED THAN THE NARRATIVE SUGGESTS
 
 The AI bubble discourse has reached fever pitch. Capacity built but unused. Copilot adoption underwhelming. Billions spent with unclear returns. The skeptics have a point — on the surface.
 
@@ -16,13 +15,11 @@ This essay argues three things:
 2. Enterprise AI value comes from orchestration and diffusion, not frontier model capability
 3. The capex "problem" is actually a moat — and every drawdown is an opportunity
 
----
-
 ## The Fallback Moat: Why Iteration Runway Matters
 
-Here's what the bubble narrative misses: **technology has always worked by hacking at it until it fits.**
+Here's what the bubble narrative misses: technology has always worked by hacking at it until it fits.
 
-Microsoft Copilot adoption is disappointing? They see why. The implementation isn't quite right. And all that will happen is they'll fix it, iterate, and try again. 
+Microsoft Copilot adoption is disappointing? They see why. The implementation isn't quite right. And all that will happen is they'll fix it, iterate, and try again.
 
 Why can they afford this patience? Because the fallback is something people are rigid about. Nobody's leaving Excel. Nobody's abandoning Teams. The failure mode isn't "users leave" — it's "users don't adopt the new feature yet."
 
@@ -44,19 +41,18 @@ Anthropic is even more exposed — primarily API and enterprise, no meaningful c
 
 The frontier gap between leading models has compressed to 3-5 months. That's not enough time to build a durable moat. Distribution wins. And MSFT, GOOG, and AMZN have distribution that took decades to build.
 
-
----
-
 ## A→B Works. A→C Doesn't (Yet). And That's Fine.
 
 Here's a framework for understanding where AI is actually creating value:
 
 **A→B: AI assists your existing workflow**
+
 - Copilot autocompleting code
 - LLM summarizing a document
 - AI flagging suspicious transactions for human review
 
 **A→C: AI replaces an entire workflow step autonomously**
+
 - Fully autonomous customer support
 - AI SDRs running sales outreach end-to-end
 - Agentic systems making unsupervised decisions
@@ -75,37 +71,35 @@ But A→B is working brilliantly, at scale, right now.
 
 The pattern across all successful enterprise deployments is identical:
 
-1. **LLM does the task** (spreading financial data, drafting documents, detecting patterns)
-2. **Validation layer checks outputs** against business rules and compliance requirements  
-3. **Human reviews exceptions** and approves high-stakes decisions
+1. LLM does the task (spreading financial data, drafting documents, detecting patterns)
+2. Validation layer checks outputs against business rules and compliance requirements
+3. Human reviews exceptions and approves high-stakes decisions
 
 This isn't a workaround for unreliable LLMs. It's the architecture that makes LLMs reliable.
 
-Palantir's Alex Karp articulated this perfectly: *"Once you build a software layer to orchestrate and manage the LLMs in a language your enterprise understands, you actually can create value."*
+Palantir's Alex Karp articulated this perfectly: "Once you build a software layer to orchestrate and manage the LLMs in a language your enterprise understands, you actually can create value."
 
 Palantir's AIP approach embodies this. Their system doesn't ask LLMs to guess context from text — it passes structured ontology objects that already carry meaning, relationships, and constraints. The model doesn't need to hallucinate because it's reasoning over governed, connected data.
 
-The value isn't in the model. It's in the orchestration layer.
-
----
+**The value isn't in the model. It's in the orchestration layer.**
 
 ## Enterprise Doesn't Need Frontier
 
 The scaling laws conversation has created a misleading impression. Yes, the cost-per-improvement at the frontier is increasing. GPT-3 to GPT-4 was maybe 10x compute for 3x capability. GPT-4 to GPT-5 might be 10x compute for 1.3x capability.
 
-But here's what matters: **enterprise doesn't need frontier improvements.**
+But here's what matters: enterprise doesn't need frontier improvements.
 
 Deutsche Bank is always two versions of Excel behind — not because they can't afford the latest, but because enterprise IT needs to vet before releasing. The same applies to AI models.
 
-Current models are already good enough for most A→B use cases. The value unlock isn't advancement to new capabilities — it's **diffusion of current capabilities** across enterprise workflows.
+*This creates a subtle but important distinction: hyperscalers will keep racing to* offer *frontier models because it's competitive positioning — nobody wants to be the cloud provider without the latest capability. But enterprise customers extracting value from A→B don't* need *continuous frontier advancement. Goldman Sachs uses GPT-4, Gemini, and Claude interchangeably depending on the task. Apple switched from ChatGPT to Gemini without friction. The demand is for frontier* access*, not frontier* advancement*. That's a crucial difference when evaluating whether training capex generates returns.*
+
+Current models are already good enough for most A→B use cases. The value unlock isn't advancement to new capabilities — it's diffusion of current capabilities across enterprise workflows.
 
 The runway exists. But it's about deployment and orchestration, not raw model performance.
 
-This reframe changes the investment thesis entirely. You're not betting on "will GPT-5 be transformative?" You're betting on "will enterprises continue integrating current-generation AI into workflows?" 
+This reframe changes the investment thesis entirely. You're not betting on "will GPT-5 be transformative?" You're betting on "will enterprises continue integrating current-generation AI into workflows?"
 
 The answer, based on every data point from JPMorgan to Deutsche Bank to HSBC, is clearly yes.
-
----
 
 ## The Capex Question: Can They Sustain It?
 
@@ -115,11 +109,15 @@ The skeptic's question: can this continue?
 
 The numbers say yes.
 
-Even at these spending levels, the hyperscalers remain free cash flow positive. Google and Microsoft's free cash flow is actually *increasing* despite the capex surge. Consensus estimates suggest AI capex will climb to 94% of operating cash flows (minus dividends and buybacks) in 2025-2026 — aggressive, but still below 100%.
+Even at these spending levels, the hyperscalers remain free cash flow positive. Google and Microsoft's free cash flow is actually increasing despite the capex surge. Consensus estimates suggest AI capex will climb to 94% of operating cash flows (minus dividends and buybacks) in 2025-2026 — aggressive, but still below 100%.
 
 They don't need to borrow to fund this. But it's getting close.
 
-More importantly: **what's the alternative?**
+*But not all capex is equal. The $400 billion isn't monolithic — it's split across training infrastructure (building better models) and inference infrastructure (running models at scale). Inference is 80-90% of total AI lifetime costs, and inference's share of compute is shifting from one-third in 2023 to two-thirds by 2026. A→B at enterprise scale requires* massive *distributed inference capacity — JPMorgan alone has 125,000 employees sending multiple prompts daily, and inference is latency-sensitive, requiring regional data centers rather than centralized clusters.*
+
+*Inference capex is clearly justified. Training capex is where the questions emerge — if models continue commoditizing on 3-5 month cycles, and efficiency gains like DeepSeek's 18x improvement continue, frontier training clusters may be overbuild. The hyperscalers are already pivoting: post-DeepSeek, the capex mix is shifting toward inference. But some training infrastructure may depreciate faster than expected if efficiency wins over scale.*
+
+More importantly: what's the alternative?
 
 Amazon's CFO put it directly: "We'll continue to make significant investments, especially in AI... We believe it to be a massive opportunity with the potential for strong returns on invested capital over the long term." And notably, Amazon is doing this while simultaneously laying off 14,000-30,000 corporate employees — primarily in HR, middle management, and analytics. This isn't contradiction; it's confirmation. Jassy has been explicit: "We will need fewer people doing some of the jobs that are being done today." The efficiency gains from AI adoption are showing up as reduced headcount. The capex funds the infrastructure; the layoffs capture the value. That's not a bubble — that's ROI materialising.
 
@@ -131,21 +129,29 @@ JPMorgan went from zero to 200,000 LLM Suite users in eight months. Each integra
 
 The capex creates capacity. The orchestration layers create demand. The step-function follows.
 
----
-
 ## The Cautions
 
 This isn't a thesis without risks.
 
-**Regional models and open source.** DeepSeek and other regionally-developed models keep pushing the boundaries of what's achievable at lower cost. Open-source alternatives create pricing pressure. For Amazon specifically, there's exposure if price-sensitive markets choose cheaper alternatives to AWS.
+~~Regional models and open source. DeepSeek and other regionally-developed models keep pushing the boundaries of what's achievable at lower cost. Open-source alternatives create pricing pressure. For Amazon specifically, there's exposure if price-sensitive markets choose cheaper alternatives to AWS.~~
 
-**Market patience.** Enterprise adoption moves slower than markets want. Sentiment can turn before the step-function becomes visible in reported numbers. If you're holding through a drawdown, you need conviction in the thesis.
+*Open source accelerates model commoditization. DeepSeek, Llama, and Mistral keep pushing the boundaries of what's achievable at lower cost — DeepSeek demonstrated 18x training efficiency gains. This is a threat, but not to the incumbents. If open source catches up to proprietary frontier models, the losers are pure-play model companies (OpenAI, Anthropic) who have no fallback. Hyperscalers can offer* any *model — proprietary or open — through their cloud platforms. The orchestration layer (Palantir, Salesforce, ServiceNow) captures value regardless of which model powers it. Open source pressure supports the incumbent thesis; it threatens the model builders.*
 
-**Meta is the outlier.** They're spending $70-72 billion in capex with no direct AI revenue line. Unlike Microsoft, Google, and Amazon, Meta doesn't have a cloud business to monetize AI directly. Their bet is that AI improves ad targeting — a real thesis, but less visible than "Azure AI revenue grew X%." 
+~~Market patience. Enterprise adoption moves slower than markets want. Sentiment can turn before the step-function becomes visible in reported numbers. If you're holding through a drawdown, you need conviction in the thesis.~~
+
+*Timing risk is real, even if thesis risk isn't. Enterprise adoption moves slower than markets want. Sentiment can turn before the step-function becomes visible in reported numbers. Amazon dropped 94% during the dot-com crash despite having the correct e-commerce thesis — it took years for the fundamentals to vindicate the believers. The difference today: Microsoft, Google, and Amazon generate $200B+ combined annual free cash flow. They won't go bankrupt during a sentiment drawdown. But multiple compression can still be painful. A 40-60% drawdown on "AI disappointment" narrative is possible even if the underlying thesis plays out. If you're holding through that, you need conviction* and *liquidity. Being right in three years doesn't help if you're forced to sell in six months.*
+
+*Survivor bias in the thesis. This analysis assumes all three hyperscalers execute well. History suggests that's optimistic — in most platform transitions, one incumbent stumbles. If Google loses search share faster than Gemini monetizes, or Amazon's retail margin compression accelerates, the "diversified bet on incumbents" framing breaks. The thesis is strongest as a basket; individual positions carry idiosyncratic risk.*
+
+*Adjacent casualties if training disappoints. If the "training bubble inside broader capex" thesis is correct, the most exposed names aren't the hyperscalers — they're the picks-and-shovels plays priced for continued training dominance. NVIDIA trades at multiples that assume training capex grows indefinitely. But inference workloads can run on older chips, custom ASICs, and less cutting-edge hardware. If efficiency gains continue compressing the frontier gap, training clusters depreciate fast — and NVIDIA's multiple compresses with them. The hyperscalers have fallback products; NVIDIA's fallback is gaming GPUs.*
+
+*A training bubble inside the broader capex? The sharpest version of the bear case isn't that AI capex is wasted — it's that the* marginal training dollar *is going to the wrong layer. If enterprise is happy with A→B, and current models are good enough, why the arms race for GPT-5 and beyond? The nuanced answer: inference capex is clearly justified (A→B at scale needs it), but frontier training clusters may be overbuild if models commoditize faster than expected. Hyperscalers are already pivoting toward inference post-DeepSeek. The risk isn't that the $400B is wasted — it's that some portion is allocated to training that won't generate commensurate returns. This doesn't break the thesis (fallback moats still hold), but it may mean returns on the marginal capex dollar disappoint at the frontier.*
+
+~~Meta is the outlier. They're spending $70-72 billion in capex with no direct AI revenue line. Unlike Microsoft, Google, and Amazon, Meta doesn't have a cloud business to monetize AI directly. Their bet is that AI improves ad targeting — a real thesis, but less visible than "Azure AI revenue grew X%."~~
+
+*Meta's thesis is different, not necessarily worse. They're spending $70-72 billion in capex with no direct AI revenue line — no cloud business to show "AI revenue grew X%." But Meta owns social media outside China: 3.9 billion monthly users across Facebook, Instagram, and WhatsApp. Their bet is that AI improves content ranking (more engagement → more ad impressions) and ad targeting (higher relevance → higher CPM). This is a coherent thesis — the difference is attribution. "Azure AI revenue grew 30%" is visible in a quarterly filing. "Meta's ad efficiency improved because of AI-driven targeting" is inferred from ARPU trends. The risk profile is different: less visible, harder to attribute, but potentially just as real. Ads aren't going anywhere, and Meta's distribution moat is as strong as any hyperscaler's.*
 
 But for Microsoft, Google, and Amazon? The thesis holds. Cloud revenue is growing. AI integration is accelerating. The fallback products aren't going anywhere.
-
----
 
 ## Conclusion
 
@@ -158,7 +164,7 @@ The incumbents have fallback moats. They have iteration runway. They have distri
 
 Models will keep improving — it's math, even if returns are diminishing at the frontier. Chips will keep helping. And the incumbents will keep hacking at it until it works.
 
-The people calling this a bubble are watching the messy middle of technology adoption and mistaking it for failure. 
+The people calling this a bubble are watching the messy middle of technology adoption and mistaking it for failure.
 
 It isn't. It's just how technology has always worked.
 
