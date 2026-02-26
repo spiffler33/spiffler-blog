@@ -120,4 +120,4 @@ There’s no shortcut to that. You have to actually go get some scar tissue.
 
 -----
 
-*Originally a conversation with Claude. Published at [blog.spiffler.xyz](https://blog.spiffler.xyz).*
+*Originally a conversation with Claude.
