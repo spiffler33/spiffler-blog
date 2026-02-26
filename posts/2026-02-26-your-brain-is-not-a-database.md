@@ -3,8 +3,6 @@ title: Your Brain Is Not A Database
 date: 2026-02-26
 ---
 
-# Your Brain Is Not a Database (And That’s Your Last Advantage)
-
 *What happens to the human mind when retrieval becomes free?*
 
 -----
